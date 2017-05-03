@@ -1,3 +1,3 @@
-//require('tether')
-//require('jQuery')
-require('bootstrap')
+Tether = require('tether');
+$ = jQuery = require('jquery');
+require('bootstrap');

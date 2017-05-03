@@ -17,6 +17,8 @@ var sass = require('gulp-sass');
 //var yaml = require('js-yaml');
 //var fs = require('fs-extra');
 
+var ghPages = require('gulp-gh-pages');
+
 function compile(watch) {
 
   var bundler = browserify('./static/js/main.js', {
@@ -141,3 +143,9 @@ gulp.task('scss', function() {
 
 //Gulp.task('default', gulp.parallel('javascript', 'test', 'bump', 'appveyor'));
 gulp.task('default', gulp.parallel('javascript', 'html', 'scss', 'test'));
+
+
+gulp.task('deploy', gulp.series('default', function() {
+  return gulp.src('./public/**/*')
+    .pipe(ghPages());
+}));
