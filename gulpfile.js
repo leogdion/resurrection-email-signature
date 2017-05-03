@@ -170,8 +170,14 @@ gulp.task('scss', function() {
     .pipe(gulp.dest('./public/css'));
 });
 
+gulp.task('assets', function() {
+
+
+  return gulp.src('./static/assets/**/*.*')
+    .pipe(gulp.dest('./public/assets'));
+});
 //Gulp.task('default', gulp.parallel('javascript', 'test', 'bump', 'appveyor'));
-gulp.task('default', gulp.parallel('javascript', 'html', 'scss', 'test'));
+gulp.task('default', gulp.parallel('javascript', 'html', 'scss', 'assets', 'test'));
 
 
 gulp.task('deploy', gulp.series('default', function() {
