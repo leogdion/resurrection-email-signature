@@ -29,9 +29,13 @@
     "gulp-sass": "^3.1.0",
     "handlebars": "^4.0.8",
     "jshint": "^2.9.4",
+    "node-static": "^0.7.9",
     "stream-browserify": "^2.0.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6"
   }
 }
