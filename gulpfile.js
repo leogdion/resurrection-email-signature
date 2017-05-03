@@ -77,7 +77,7 @@ function compile(watch) {
   return rebundle();
 }
 
-var jsSrc = ['./*.js', 'lib/**/*.js'];
+var jsSrc = ['./*.js', 'static/js/**/*.js'];
 
 gulp.task('jscs', function() {
   return gulp.src(jsSrc, {
