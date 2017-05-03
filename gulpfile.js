@@ -35,7 +35,7 @@ gulp.task('templates', function() {
         // Allow nesting based on path using gulp-declare's processNameByPath()
         // You can remove this option completely if you aren't using nested folders
         // Drop the templates/ folder from the namespace path by removing it from the filePath
-        return declare.processNameByPath(filePath.replace('templates/', ''));
+        return declare.processNameByPath(filePath.replace('static/templates/', ''));
       },
     }))
     // Concatenate down to a single file
