@@ -23,11 +23,14 @@
     "browserify-shim": "^3.8.14",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-beautify": "^2.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-declare": "^0.3.0",
     "gulp-gh-pages": "^0.5.4",
     "gulp-handlebars": "^4.0.0",
     "gulp-jscs": "^4.0.0",
     "gulp-jshint": "^2.0.4",
     "gulp-sass": "^3.1.0",
+    "gulp-wrap": "^0.13.0",
     "handlebars": "^4.0.8",
     "jshint": "^2.9.4",
     "node-static": "^0.7.9",
@@ -37,7 +40,8 @@
     "vinyl-transform": "^1.0.0"
   },
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.6"
+    "bootstrap": "^4.0.0-alpha.6",
+    "gulp-define-module": "^0.1.5"
   },
   "browserify": {
     "transform": [
@@ -46,9 +50,9 @@
   },
   "browserify-shim": {
     "bootstrap": {
-        "depends": [
-          "jquery:jQuery"
-        ]
-      }
+      "depends": [
+        "jquery:jQuery"
+      ]
     }
+  }
 }

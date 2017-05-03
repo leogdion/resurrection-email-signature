@@ -16,6 +16,35 @@ var sass = require('gulp-sass');
 //var async = require('async');
 //var yaml = require('js-yaml');
 //var fs = require('fs-extra');
+var handlebars = require('gulp-handlebars');
+var wrap = require('gulp-wrap');
+var declare = require('gulp-declare');
+var concat = require('gulp-concat');
+
+gulp.task('templates', function() {
+  return gulp.src('./static/templates/*.hbs')
+    .pipe(handlebars({
+      handlebars: require('handlebars'),
+    }))
+    .pipe(wrap('Handlebars.template(<%= contents %>)'))
+    // Declare template functions as properties and sub-properties of exports
+    .pipe(declare({
+      root: 'exports',
+      noRedeclare: true, // Avoid duplicate declarations
+      processName: function(filePath) {
+        // Allow nesting based on path using gulp-declare's processNameByPath()
+        // You can remove this option completely if you aren't using nested folders
+        // Drop the templates/ folder from the namespace path by removing it from the filePath
+        return declare.processNameByPath(filePath.replace('templates/', ''));
+      },
+    }))
+    // Concatenate down to a single file
+    .pipe(concat('templates.js'))
+    // Add the Handlebars module in the final output
+    .pipe(wrap('var Handlebars = require("handlebars");\n <%= contents %>'))
+    // WRite the output into the templates folder
+    .pipe(gulp.dest('.tmp/'));
+});
 
 var ghPages = require('gulp-gh-pages');
 
@@ -121,7 +150,7 @@ gulp.task('transform', function() {
   return compile(true);
 });
 
-gulp.task('jsprep', gulp.parallel('lint', 'jscs', 'beautify'));
+gulp.task('jsprep', gulp.parallel('lint', 'jscs', 'beautify', 'templates'));
 
 gulp.task('test', gulp.series(gulp.parallel('jsprep')));
 
