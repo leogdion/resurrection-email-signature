@@ -47,7 +47,27 @@ const previews = function() {
           }
         }, 1000);
       });
+      $('.copy').click(function(event) {
+        var preview = $(this).parents('.card').find('.preview');
+        var range = document.createRange();
+        range.selectNode(preview.get(0));
+        window.getSelection().addRange(range);
 
+        // Copy
+        document.execCommand('copy');
+        window.setTimeout(function() {
+          if (window.getSelection) {
+            if (window.getSelection().empty) { // Chrome
+              window.getSelection().empty();
+            } else if (window.getSelection().removeAllRanges) { // Firefox
+              window.getSelection().removeAllRanges();
+            }
+          } else if (document.selection) { // IE?
+            document.selection.empty();
+          }
+        }, 1000);
+        event.preventDefault();
+      });
 
     }
   });
@@ -63,7 +83,6 @@ function updatePreviews() {
   for (var preview of previews) {
     preview(data);
   }
-  templates.formal(data);
 }
 
 $('input').on('change keyup',
