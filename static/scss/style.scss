@@ -1,12 +1,18 @@
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 html, body {
-	padding-top: 1em;
-	.preview {
-		font-family: sans-serif;
-		font-weight: normal;
-		padding: 10px;
-		border: #666 solid 1px;
+	.signatures {
+		padding-top: 3rem;
+		padding-bottom: 3rem;
+		background-color: #f7f7f7;
+		.preview {
+			&, a {
+				font-family: sans-serif;
+				font-weight: normal;
+			}
+			padding: 10px;
+			border: #666 solid 1px;
+		}
 	}
 }
 
@@ -14,3 +20,4 @@ html, body, input, button, a {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 }
+

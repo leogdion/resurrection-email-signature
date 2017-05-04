@@ -90,3 +90,7 @@ $('input').on('change keyup',
 );
 
 updatePreviews();
+
+$(function() {
+  $('[data-toggle="tooltip"]').tooltip();
+});
