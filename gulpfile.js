@@ -20,8 +20,40 @@ var handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
 var concat = require('gulp-concat');
+var del = require('del');
 
-gulp.task('templates', function() {
+gulp.task('clean:templates', function() {
+  return del([
+    '.tmp',
+  ]);
+});
+
+gulp.task('clean:javascript', function() {
+  return del([
+    'public/js',
+  ]);
+});
+
+gulp.task('clean:html', function() {
+  return del([
+    'public/**/*.html',
+  ]);
+});
+
+gulp.task('clean:scss', function() {
+  return del([
+    'public/css/**/*.css',
+  ]);
+});
+
+gulp.task('clean:assets', function() {
+  return del([
+    'public/assets',
+  ]);
+});
+
+
+gulp.task('templates', gulp.series('clean:templates', function() {
   return gulp.src('./static/templates/*.hbs')
     .pipe(handlebars({
       handlebars: require('handlebars'),
@@ -44,7 +76,7 @@ gulp.task('templates', function() {
     .pipe(wrap('var Handlebars = require("handlebars");\n <%= contents %>'))
     // WRite the output into the templates folder
     .pipe(gulp.dest('.tmp/'));
-});
+}));
 
 var ghPages = require('gulp-gh-pages');
 
@@ -146,9 +178,9 @@ gulp.task('lint', gulp.series('beautify', function() {
 //   });
 // }));
 
-gulp.task('transform', function() {
+gulp.task('transform', gulp.series('clean:javascript', function() {
   return compile(true);
-});
+}));
 
 gulp.task('jsprep', gulp.parallel('lint', 'jscs', 'beautify', 'templates'));
 
@@ -157,25 +189,25 @@ gulp.task('test', gulp.series(gulp.parallel('jsprep')));
 
 gulp.task('javascript', gulp.series('jsprep', 'transform'));
 
-gulp.task('html', function() {
+gulp.task('html', gulp.series('clean:html', function() {
 
 
   return gulp.src('./static/**/*.html')
     .pipe(gulp.dest('./public'));
-});
+}));
 
-gulp.task('scss', function() {
+gulp.task('scss', gulp.series('clean:scss', function() {
   return gulp.src('./static/scss/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./public/css'));
-});
+}));
 
-gulp.task('assets', function() {
+gulp.task('assets', gulp.series('clean:assets', function() {
 
 
   return gulp.src('./static/assets/**/*.*')
     .pipe(gulp.dest('./public/assets'));
-});
+}));
 //Gulp.task('default', gulp.parallel('javascript', 'test', 'bump', 'appveyor'));
 gulp.task('default', gulp.parallel('javascript', 'html', 'scss', 'assets', 'test'));
 

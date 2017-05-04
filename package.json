@@ -21,6 +21,7 @@
     "babelify": "^7.3.0",
     "browserify": "^14.3.0",
     "browserify-shim": "^3.8.14",
+    "del": "^2.2.2",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-beautify": "^2.0.1",
     "gulp-concat": "^2.6.1",

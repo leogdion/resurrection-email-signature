@@ -1,8 +1,7 @@
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 html, body {
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 300;
+	padding-top: 1em;
 	.preview {
 		font-family: sans-serif;
 		font-weight: normal;
@@ -11,6 +10,7 @@ html, body {
 	}
 }
 
-body {
-  padding-top: 5rem;
+html, body, input, button, a {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
 }
